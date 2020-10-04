@@ -1,8 +1,8 @@
 import React, {useReducer} from 'react';
 
-import FirebaseReducer from './firebaseReducer';
-import FirebaseContext from './firebaseContext';
+import firebase from '../../firebase';
 import firebaseReducer from './firebaseReducer';
+import FirebaseContext from './firebaseContext';
 
 const FirebaseState = (props) => {
   // Crear state inicial
@@ -17,6 +17,7 @@ const FirebaseState = (props) => {
     <FirebaseContext.Provider
       value={{
         menu: state.menu,
+        firebase,
       }}>
       {props.children}
     </FirebaseContext.Provider>
