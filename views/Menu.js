@@ -22,11 +22,30 @@ const Menu = () => {
     console.log(menu);
   }, []);
 
+  const mostrarHeading = (categoria, i) => {
+    if (i > 0) {
+      const categoriaAnterior = menu[i - 1].categoria;
+      if (categoriaAnterior !== categoria) {
+        return (
+          <Separator>
+            <Text>{categoria}</Text>
+          </Separator>
+        );
+      }
+    } else {
+      return (
+        <Separator>
+          <Text>{categoria}</Text>
+        </Separator>
+      );
+    }
+  };
+
   return (
     <Container style={globalStyles.contenedor}>
       <Content style={{backgroundColor: '#FFF'}}>
         <List>
-          {menu.map((platillo) => {
+          {menu.map((platillo, i) => {
             const {
               imagen,
               nombre,
@@ -38,6 +57,7 @@ const Menu = () => {
 
             return (
               <Fragment key={id}>
+                {mostrarHeading(categoria, i)}
                 <ListItem>
                   <Thumbnail large square source={{uri: imagen}} />
                   <Body>

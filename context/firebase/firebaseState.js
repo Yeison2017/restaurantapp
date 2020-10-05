@@ -5,6 +5,7 @@ import FirebaseReducer from './firebaseReducer';
 import FirebaseContext from './firebaseContext';
 
 import {OBTENER_PRODUCTOS_EXITO} from '../../types';
+import _ from 'lodash';
 
 const FirebaseState = (props) => {
   // Crear state inicial
@@ -32,7 +33,8 @@ const FirebaseState = (props) => {
         };
       });
 
-      console.log(platillos);
+      // Ordenar por categoria con lodash
+      platillos = _.sortBy(platillos, 'categoria');
 
       // Tenemos resultados de la base de datos
       dispatch({
