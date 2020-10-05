@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 
-const globlaStyles = StyleSheet.create({
+const globlalStyles = StyleSheet.create({
   contenedor: {
     flex: 1,
   },
@@ -18,4 +18,4 @@ const globlaStyles = StyleSheet.create({
   },
 });
 
-export default globlaStyles;
+export default globlalStyles;

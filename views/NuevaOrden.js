@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Container, Button, Text} from 'native-base';
-import globalStyles from '../styles.js/global';
+import globalStyles from '../styles/global';
 import {useNavigation} from '@react-navigation/native';
 
 const NuevaOrden = () => {

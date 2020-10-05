@@ -3,7 +3,7 @@ import React, {useReducer} from 'react';
 import PedidoReducer from './pedidosReducer';
 import PedidoContext from './pedidosContext';
 
-const PedidosState = (props) => {
+const PedidoState = (props) => {
   // Crear state inicial
   const initialState = {
     pedido: [],
@@ -22,4 +22,4 @@ const PedidosState = (props) => {
   );
 };
 
-export default PedidosState;
+export default PedidoState;
