@@ -17,7 +17,6 @@ import {useNavigation} from '@react-navigation/native';
 import globalStyles from '../styles/global';
 
 import PedidoContext from '../context/pedidos/pedidosContext';
-import globlalStyles from '../styles/global';
 
 const FormularioPlatillo = () => {
   // State para cantidades
