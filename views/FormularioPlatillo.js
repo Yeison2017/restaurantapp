@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react';
-import {StyleSheet} from 'react-native';
+import {Alert} from 'react-native';
 import {
   Container,
   Content,
@@ -10,6 +10,8 @@ import {
   Col,
   Button,
   Text,
+  Footer,
+  FooterTab,
 } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import globalStyles from '../styles/global';
@@ -51,6 +53,27 @@ const FormularioPlatillo = () => {
     guardarCantidad(nuevaCantidad);
   };
 
+  // Confirma si la orden es correcta
+  const confirmarOrden = () => {
+    Alert.alert(
+      '¿Deseas confirmar tu pedido?',
+      'Un pedido confirmado ya no se podrá modificar',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => {
+            // Almacenar el pedido al pedido principal
+            // Navegar hacia el Resumen
+          },
+        },
+      ],
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+    );
+  };
+
   return (
     <Container>
       <Content>
@@ -88,6 +111,14 @@ const FormularioPlatillo = () => {
           <Text style={globalStyles.cantidad}>Subtotal: $ {total}</Text>
         </Form>
       </Content>
+
+      <Footer>
+        <FooterTab>
+          <Button style={globalStyles.boton} onPress={() => confirmarOrden()}>
+            <Text style={globalStyles.botonTexto}>Agregar al pedido</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
     </Container>
   );
 };
