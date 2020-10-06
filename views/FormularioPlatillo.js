@@ -21,6 +21,20 @@ const FormularioPlatillo = () => {
   // State para cantidades
   const [cantidad, guardarCantidad] = useState(1);
 
+  // Decrementar en uno
+  const decrementarUno = () => {
+    if (cantidad > 1) {
+      const nuevaCantidad = parseInt(cantidad) - 1;
+      guardarCantidad(nuevaCantidad);
+    }
+  };
+
+  // incrementa en uno la cantidad
+  const incrementarUno = () => {
+    const nuevaCantidad = parseInt(cantidad) + 1;
+    guardarCantidad(nuevaCantidad);
+  };
+
   return (
     <Container>
       <Content>
@@ -28,7 +42,11 @@ const FormularioPlatillo = () => {
           <Text style={globalStyles.titulo}>Cantidad</Text>
           <Grid>
             <Col>
-              <Button props dark style={{height: 80, justifyContent: 'center'}}>
+              <Button
+                props
+                dark
+                style={{height: 80, justifyContent: 'center'}}
+                onPress={() => decrementarUno()}>
                 <Icon style={{fontSize: 40}} name="remove" />
               </Button>
             </Col>
@@ -41,7 +59,11 @@ const FormularioPlatillo = () => {
               />
             </Col>
             <Col>
-              <Button props dark style={{height: 80, justifyContent: 'center'}}>
+              <Button
+                props
+                dark
+                style={{height: 80, justifyContent: 'center'}}
+                onPress={() => incrementarUno()}>
                 <Icon style={{fontSize: 40}} name="add" />
               </Button>
             </Col>
