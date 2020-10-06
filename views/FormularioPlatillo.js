@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {
   Container,
@@ -18,6 +18,9 @@ import PedidoContext from '../context/pedidos/pedidosContext';
 import globlalStyles from '../styles/global';
 
 const FormularioPlatillo = () => {
+  // State para cantidades
+  const [cantidad, guardarCantidad] = useState(1);
+
   return (
     <Container>
       <Content>
@@ -30,7 +33,12 @@ const FormularioPlatillo = () => {
               </Button>
             </Col>
             <Col>
-              <Input style={{textAlign: 'center', fontSize: 20}} value="1" />
+              <Input
+                style={{textAlign: 'center', fontSize: 20}}
+                value={cantidad.toString()}
+                keyboardType="numeric"
+                onChangeText={(cantidad) => guardarCantidad(cantidad)}
+              />
             </Col>
             <Col>
               <Button props dark style={{height: 80, justifyContent: 'center'}}>

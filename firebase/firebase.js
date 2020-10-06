@@ -6,6 +6,7 @@ import firebaseConfig from './config';
 class Firebase {
   constructor() {
     if (!app.apps.length) {
+      // firebase.firestore().settings({experimentalForceLongPolling: true});
       app.initializeApp(firebaseConfig);
     }
 
