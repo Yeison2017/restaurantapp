@@ -16,9 +16,9 @@ import {
 } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import globalStyles from '../styles/global';
+import firebase from '../firebase';
 
 import PedidoContext from '../context/pedidos/pedidosContext';
-import globlalStyles from '../styles/global';
 
 const ResumenPedido = () => {
   const navigation = useNavigation();
@@ -49,7 +49,28 @@ const ResumenPedido = () => {
       [
         {
           text: 'Confirmar',
-          onPress: () => {
+          onPress: async () => {
+            // Crear un objeto
+            const pedidoObj = {
+              tiempoEntrega: 0,
+              completado: false,
+              total: Number(total),
+              orden: pedido, //array
+              creado: Date.now(),
+            };
+
+            try {
+              const pedido = await firebase.db
+                .collection('ordenes')
+                .add(pedidoObj);
+
+              console.log(pedido.id);
+            } catch (error) {
+              console.log(error);
+            }
+
+            // Escribir el pedido en firebase
+
             navigation.navigate('ProgresoPedido');
           },
         },
@@ -106,7 +127,7 @@ const ResumenPedido = () => {
                     full
                     danger
                     style={{marginTop: 20}}>
-                    <Text style={[globlalStyles.botonTexto, {color: '#FFF'}]}>
+                    <Text style={[globalStyles.botonTexto, {color: '#FFF'}]}>
                       Eliminar
                     </Text>
                   </Button>
