@@ -20,6 +20,8 @@ import globalStyles from '../styles/global';
 import PedidoContext from '../context/pedidos/pedidosContext';
 
 const ResumenPedido = () => {
+  const navigation = useNavigation();
+
   // context de pedido
   const {pedido, total, mostrarResumen} = useContext(PedidoContext);
 
@@ -30,10 +32,10 @@ const ResumenPedido = () => {
   const calcularTotal = () => {
     let nuevoTotal = 0;
     nuevoTotal = pedido.reduce(
-      (nuevoTotal, articulo) => nuevoTotal * articulo.total,
+      (nuevoTotal, articulo) => nuevoTotal + articulo.total,
       0,
-      mostrarResumen(nuevoTotal),
     );
+    mostrarResumen(nuevoTotal);
   };
 
   return (
@@ -60,7 +62,28 @@ const ResumenPedido = () => {
         })}
 
         <Text style={globalStyles.cantidad}>Total a Pagar: $ {total} </Text>
+
+        <Button
+          onPress={() => navigation.navigate('Menu')}
+          style={{marginTop: 30, marginBottom: 30}}
+          full
+          dark>
+          <Text style={[globalStyles.botonTexto, {color: '#FFF'}]}>
+            Seguir Pidiendo
+          </Text>
+        </Button>
       </Content>
+
+      <Footer>
+        <FooterTab>
+          <Button
+            onPress={() => navigation.navigate('ProgresoPedido')}
+            style={globalStyles.boton}
+            full>
+            <Text style={globalStyles.botonTexto}>Ordenar pedido</Text>
+          </Button>
+        </FooterTab>
+      </Footer>
     </Container>
   );
 };
