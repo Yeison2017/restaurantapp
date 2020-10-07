@@ -24,9 +24,13 @@ const ResumenPedido = () => {
   const navigation = useNavigation();
 
   // context de pedido
-  const {pedido, total, mostrarResumen, eliminarProducto} = useContext(
-    PedidoContext,
-  );
+  const {
+    pedido,
+    total,
+    mostrarResumen,
+    eliminarProducto,
+    pedidoRealizado,
+  } = useContext(PedidoContext);
 
   useEffect(() => {
     calcularTotal();
@@ -64,14 +68,13 @@ const ResumenPedido = () => {
                 .collection('ordenes')
                 .add(pedidoObj);
 
-              console.log(pedido.id);
+              pedidoRealizado(pedido.id);
+
+              // Redireccionar a progreso
+              navigation.navigate('ProgresoPedido');
             } catch (error) {
               console.log(error);
             }
-
-            // Escribir el pedido en firebase
-
-            navigation.navigate('ProgresoPedido');
           },
         },
         {
