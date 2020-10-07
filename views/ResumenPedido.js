@@ -18,12 +18,15 @@ import {useNavigation} from '@react-navigation/native';
 import globalStyles from '../styles/global';
 
 import PedidoContext from '../context/pedidos/pedidosContext';
+import globlalStyles from '../styles/global';
 
 const ResumenPedido = () => {
   const navigation = useNavigation();
 
   // context de pedido
-  const {pedido, total, mostrarResumen} = useContext(PedidoContext);
+  const {pedido, total, mostrarResumen, eliminarProducto} = useContext(
+    PedidoContext,
+  );
 
   useEffect(() => {
     calcularTotal();
@@ -58,6 +61,28 @@ const ResumenPedido = () => {
     );
   };
 
+  // Elimina un producto del arreglo de pedido
+  const confirmarEliminacion = (id) => {
+    Alert.alert(
+      '¿Deseas eliminar este artículo?',
+      'Una vez eliminado no se puede recuperar',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => {
+            // Eliminar del estate
+            eliminarProducto(id);
+            // Calcular
+          },
+        },
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+      ],
+    );
+  };
+
   return (
     <Container style={globalStyles.contenedor}>
       <Content style={globalStyles.contenido}>
@@ -75,6 +100,16 @@ const ResumenPedido = () => {
                   <Text>{nombre}</Text>
                   <Text>Cantidad: {cantidad}</Text>
                   <Text>Precio: $ {precio}</Text>
+
+                  <Button
+                    onPress={() => confirmarEliminacion(id)}
+                    full
+                    danger
+                    style={{marginTop: 20}}>
+                    <Text style={[globlalStyles.botonTexto, {color: '#FFF'}]}>
+                      Eliminar
+                    </Text>
+                  </Button>
                 </Body>
               </ListItem>
             </List>

@@ -7,6 +7,7 @@ import {
   SELECCIONAR_PRODUCTO,
   CONFIRMAR_ORDENAR_PLATILLO,
   MOSTRAR_RESUMEN,
+  ELIMINAR_PRODUCTO,
 } from '../../types';
 
 const PedidoState = (props) => {
@@ -44,6 +45,14 @@ const PedidoState = (props) => {
     });
   };
 
+  // Eliminar un articulo del carrito
+  const eliminarProducto = (id) => {
+    dispatch({
+      type: ELIMINAR_PRODUCTO,
+      payload: id,
+    });
+  };
+
   return (
     <PedidoContext.Provider
       value={{
@@ -53,6 +62,7 @@ const PedidoState = (props) => {
         seleccionarPlatillo,
         guardarPedido,
         mostrarResumen,
+        eliminarProducto,
       }}>
       {props.children}
     </PedidoContext.Provider>
