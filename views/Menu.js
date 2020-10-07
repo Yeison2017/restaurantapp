@@ -29,7 +29,6 @@ const Menu = () => {
 
   useEffect(() => {
     obtenerProductos();
-    console.log(menu);
   }, []);
 
   const mostrarHeading = (categoria, i) => {
