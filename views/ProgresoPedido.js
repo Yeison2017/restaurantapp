@@ -11,6 +11,7 @@ const ProresoPedido = () => {
   const {idPedido} = useContext(PedidoContext);
 
   const [tiempo, guardarTiempo] = useState(0);
+  const [completado, guardarCompletado] = useState(false);
 
   useEffect(() => {
     const obtenerProducto = () => {
@@ -19,6 +20,7 @@ const ProresoPedido = () => {
         .doc(idPedido)
         .onSnapshot(function (doc) {
           guardarTiempo(doc.data().tiempoEntrega);
+          guardarCompletado(doc.data().completado);
         });
     };
     obtenerProducto();
@@ -47,7 +49,7 @@ const ProresoPedido = () => {
           </>
         )}
 
-        {tiempo > 0 && (
+        {!completado && tiempo > 0 && (
           <>
             <Text style={{textAlign: 'center'}}>Su orden estará lista en:</Text>
             <Text>
@@ -56,6 +58,19 @@ const ProresoPedido = () => {
                 renderer={renderer}
               />
             </Text>
+          </>
+        )}
+
+        {completado && (
+          <>
+            <H1 style={styles.textCompletado}>Orden Lista</H1>
+            <H3 style={styles.textCompletado}>
+              Por favor, pase a recoger su pedido
+            </H3>
+
+            <Button>
+              <Text>Comenzar Una Orden Nueva</Text>
+            </Button>
           </>
         )}
       </View>
@@ -69,6 +84,11 @@ const styles = StyleSheet.create({
     fontSize: 60,
     textAlign: 'center',
     marginTop: 30,
+  },
+  textCompletado: {
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    marginBottom: 20,
   },
 });
 
